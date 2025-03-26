@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Search, Thermometer, AlertCircle, ThumbsUp, ThumbsDown, X, Check, Loader2 } from 'lucide-react';
-import { Button } from '@/app/components/ui/Button';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/app/components/ui/Card';
-import { Badge } from '@/app/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
 
-const MainLayout = dynamic(() => import('@/app/components/layout/MainLayout'), { ssr: false });
+const MainLayout = dynamic(() => import('@/components/layout/MainLayout'), { ssr: false });
 
 type Symptom = {
   id: string;

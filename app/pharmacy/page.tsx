@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Search, Filter, Plus, Pill, ShoppingCart, Package, Clock, X, Check, ChevronRight } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/app/components/ui/Card';
-import { Button } from '@/app/components/ui/Button';
-import { Badge } from '@/app/components/ui/Badge';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 
-const MainLayout = dynamic(() => import('@/app/components/layout/MainLayout'), { ssr: false });
+const MainLayout = dynamic(() => import('@/components/layout/MainLayout'), { ssr: false });
 
 // Types
 type MedicationType = 'prescription' | 'otc';

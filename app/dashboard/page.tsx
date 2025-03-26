@@ -14,9 +14,9 @@ import {
   MessageSquare,
   ChevronRight,
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../../../components/ui/Card';
-import { Button } from '../../../components/ui/Button';
-import { Badge } from '../../../components/ui/Badge';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 import {
   LineChart,
   Line,
@@ -30,7 +30,7 @@ import {
 } from 'recharts';
 import { format } from 'date-fns';
 
-const MainLayout = dynamic(() => import('../../../components/layout/MainLayout'), { ssr: false });
+const MainLayout = dynamic(() => import('@/components/layout/MainLayout'), { ssr: false });
 
 // Sample data for charts
 const healthData = [

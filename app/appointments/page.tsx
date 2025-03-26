@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Calendar as CalendarIcon, Clock, Video, Phone, Search, Filter, Plus } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/app/components/ui/Card';
-import { Button } from '@/app/components/ui/Button';
-import { Badge } from '@/app/components/ui/Badge';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 import Calendar from 'react-calendar';
 import { format, isToday, isTomorrow, isThisWeek, addMinutes } from 'date-fns';
 
-const MainLayout = dynamic(() => import('@/app/components/layout/MainLayout'), { ssr: false });
+const MainLayout = dynamic(() => import('@/components/layout/MainLayout'), { ssr: false });
 
 type AppointmentStatus = 'upcoming' | 'completed' | 'cancelled';
 type AppointmentType = 'video' | 'phone';
