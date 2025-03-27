@@ -50,8 +50,8 @@ export default function Dashboard() {
   return (
     <MainLayout title="Dashboard">
       <div className="mb-8">
-        <h2 className="text-sm text-gray-600 mb-1">{formattedDate}</h2>
-        <h3 className="text-2xl font-semibold">Welcome back, Juan!</h3>
+        <h2 className="text-sm text-gray-600 dark:text-gray-400 mb-1">{formattedDate}</h2>
+        <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Welcome back, Juan!</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -71,9 +71,9 @@ export default function Dashboard() {
                 </div>
               </div>
               <div>
-                <h4 className="font-medium text-gray-900">Dr. Maria Santos</h4>
-                <p className="text-sm text-gray-600">Cardiologist</p>
-                <div className="flex items-center mt-2 text-sm text-gray-600">
+                <h4 className="font-medium text-gray-900 dark:text-white">Dr. Maria Santos</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Cardiologist</p>
+                <div className="flex items-center mt-2 text-sm text-gray-600 dark:text-gray-400">
                   <Clock className="h-4 w-4 mr-1" />
                   <span>2:00 PM - 2:30 PM</span>
                 </div>
@@ -102,26 +102,26 @@ export default function Dashboard() {
                   <Heart className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Heart Rate</p>
-                  <p className="text-lg font-medium">78 BPM</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Heart Rate</p>
+                  <p className="text-lg font-medium text-gray-900 dark:text-white">78 BPM</p>
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
                   <Activity className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Blood Pressure</p>
-                  <p className="text-lg font-medium">120/80 mmHg</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Blood Pressure</p>
+                  <p className="text-lg font-medium text-gray-900 dark:text-white">120/80 mmHg</p>
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+                <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 mr-3">
                   <ThermometerSun className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Body Temperature</p>
-                  <p className="text-lg font-medium">36.6°C</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Body Temperature</p>
+                  <p className="text-lg font-medium text-gray-900 dark:text-white">36.6°C</p>
                 </div>
               </div>
             </div>
@@ -143,35 +143,35 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="p-3 bg-gray-50 rounded-lg">
+              <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-medium text-gray-900">Metformin</p>
-                    <p className="text-xs text-gray-600">500mg - 1 tablet</p>
+                    <p className="font-medium text-gray-900 dark:text-white">Metformin</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">500mg - 1 tablet</p>
                   </div>
                   <Badge variant="success" rounded>Taken</Badge>
                 </div>
-                <p className="text-xs text-gray-600 mt-2">8:00 AM - After breakfast</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">8:00 AM - After breakfast</p>
               </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
+              <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-medium text-gray-900">Losartan</p>
-                    <p className="text-xs text-gray-600">50mg - 1 tablet</p>
+                    <p className="font-medium text-gray-900 dark:text-white">Losartan</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">50mg - 1 tablet</p>
                   </div>
                   <Badge variant="warning" rounded>Upcoming</Badge>
                 </div>
-                <p className="text-xs text-gray-600 mt-2">8:00 PM - After dinner</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">8:00 PM - After dinner</p>
               </div>
-              <div className="p-3 bg-gray-50 rounded-lg">
+              <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-medium text-gray-900">Atorvastatin</p>
-                    <p className="text-xs text-gray-600">20mg - 1 tablet</p>
+                    <p className="font-medium text-gray-900 dark:text-white">Atorvastatin</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">20mg - 1 tablet</p>
                   </div>
                   <Badge variant="warning" rounded>Upcoming</Badge>
                 </div>
-                <p className="text-xs text-gray-600 mt-2">8:00 PM - After dinner</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">8:00 PM - After dinner</p>
               </div>
             </div>
           </CardContent>
@@ -199,10 +199,25 @@ export default function Dashboard() {
                   data={healthData}
                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-700" />
+                  <XAxis 
+                    dataKey="date"
+                    stroke="#6b7280" 
+                    className="dark:text-gray-400" 
+                    tick={{ fill: "currentColor" }}
+                  />
+                  <YAxis 
+                    stroke="#6b7280" 
+                    className="dark:text-gray-400"
+                    tick={{ fill: "currentColor" }}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: "var(--bg-color)", 
+                      borderColor: "var(--border-color)",
+                      color: "var(--text-color)"
+                    }}
+                  />
                   <Line
                     type="monotone"
                     dataKey="heartRate"
@@ -226,15 +241,31 @@ export default function Dashboard() {
                   data={healthData}
                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-700" />
+                  <XAxis 
+                    dataKey="date"
+                    stroke="#6b7280" 
+                    className="dark:text-gray-400" 
+                    tick={{ fill: "currentColor" }}
+                  />
+                  <YAxis 
+                    stroke="#6b7280" 
+                    className="dark:text-gray-400"
+                    tick={{ fill: "currentColor" }}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: "var(--bg-color)", 
+                      borderColor: "var(--border-color)",
+                      color: "var(--text-color)"
+                    }}
+                  />
                   <Area
                     type="monotone"
                     dataKey="steps"
                     stroke="#10b981"
                     fill="#d1fae5"
+                    className="dark:fill-green-900/30"
                     name="Daily Steps"
                   />
                 </AreaChart>
@@ -246,38 +277,38 @@ export default function Dashboard() {
 
       {/* Quick Actions */}
       <div className="mb-6">
-        <h3 className="text-lg font-medium mb-4">Quick Actions</h3>
+        <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-white">Quick Actions</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <Link href="/appointments" className="block">
-            <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
-              <div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center text-primary mb-3">
+            <div className="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-md transition-all">
+              <div className="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary mb-3">
                 <Calendar className="h-6 w-6" />
               </div>
-              <p className="text-sm font-medium text-gray-900">Book Appointment</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">Book Appointment</p>
             </div>
           </Link>
           <Link href="/messages" className="block">
-            <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
-              <div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center text-primary mb-3">
+            <div className="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-md transition-all">
+              <div className="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary mb-3">
                 <MessageSquare className="h-6 w-6" />
               </div>
-              <p className="text-sm font-medium text-gray-900">Message Doctor</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">Message Doctor</p>
             </div>
           </Link>
           <Link href="/symptom-checker" className="block">
-            <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
-              <div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center text-primary mb-3">
+            <div className="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-md transition-all">
+              <div className="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary mb-3">
                 <ThermometerSun className="h-6 w-6" />
               </div>
-              <p className="text-sm font-medium text-gray-900">Symptom Checker</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">Symptom Checker</p>
             </div>
           </Link>
           <Link href="/pharmacy" className="block">
-            <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all">
-              <div className="h-12 w-12 rounded-full bg-primary-100 flex items-center justify-center text-primary mb-3">
+            <div className="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-md transition-all">
+              <div className="h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center text-primary mb-3">
                 <Pill className="h-6 w-6" />
               </div>
-              <p className="text-sm font-medium text-gray-900">Order Medication</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">Order Medication</p>
             </div>
           </Link>
         </div>
@@ -285,53 +316,53 @@ export default function Dashboard() {
 
       {/* Recent Activities */}
       <div>
-        <h3 className="text-lg font-medium mb-4">Recent Activities</h3>
+        <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-white">Recent Activities</h3>
         <Card variant="default">
           <CardContent className="px-0 py-0">
-            <div className="divide-y divide-gray-200">
-              <div className="flex items-center p-4 hover:bg-gray-50">
-                <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
+              <div className="flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
                   <FileText className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Lab Results Uploaded</p>
-                  <p className="text-xs text-gray-600">Complete Blood Count (CBC) results are now available</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">Lab Results Uploaded</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Complete Blood Count (CBC) results are now available</p>
                 </div>
-                <p className="text-xs text-gray-500">2 hours ago</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500">2 hours ago</p>
               </div>
-              <div className="flex items-center p-4 hover:bg-gray-50">
-                <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
+              <div className="flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 mr-3">
                   <Pill className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Prescription Filled</p>
-                  <p className="text-xs text-gray-600">Your prescription for Metformin has been filled</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">Prescription Filled</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Your prescription for Metformin has been filled</p>
                 </div>
-                <p className="text-xs text-gray-500">Yesterday</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500">Yesterday</p>
               </div>
-              <div className="flex items-center p-4 hover:bg-gray-50">
-                <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3">
+              <div className="flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                <div className="h-10 w-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mr-3">
                   <MessageSquare className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Doctor's Message</p>
-                  <p className="text-xs text-gray-600">Dr. Santos sent you a message about your treatment plan</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">Doctor's Message</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Dr. Santos sent you a message about your treatment plan</p>
                 </div>
-                <p className="text-xs text-gray-500">2 days ago</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500">2 days ago</p>
               </div>
-              <div className="flex items-center p-4 hover:bg-gray-50">
-                <div className="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-3">
+              <div className="flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                <div className="h-10 w-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center text-yellow-600 dark:text-yellow-400 mr-3">
                   <Calendar className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">Appointment Completed</p>
-                  <p className="text-xs text-gray-600">Follow-up consultation with Dr. Reyes</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">Appointment Completed</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Follow-up consultation with Dr. Reyes</p>
                 </div>
-                <p className="text-xs text-gray-500">3 days ago</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500">3 days ago</p>
               </div>
             </div>
           </CardContent>
-          <CardFooter className="border-t border-gray-200">
+          <CardFooter className="border-t border-gray-200 dark:border-gray-700">
             <Button variant="ghost" fullWidth className="text-primary">
               View All Activities
               <ArrowRight className="h-4 w-4 ml-1" />

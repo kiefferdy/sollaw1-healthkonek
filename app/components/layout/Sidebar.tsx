@@ -40,7 +40,7 @@ export default function Sidebar() {
       <div className="fixed z-50 top-4 left-4 md:hidden">
         <button
           type="button"
-          className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+          className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span className="sr-only">Open sidebar</span>
@@ -60,7 +60,7 @@ export default function Sidebar() {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed inset-0 z-40 md:hidden bg-white shadow-lg"
+            className="fixed inset-0 z-40 md:hidden bg-white dark:bg-gray-900 shadow-lg"
           >
             <div className="flex flex-col h-full pt-20 pb-4 overflow-y-auto">
               <div className="px-4">
@@ -83,14 +83,14 @@ export default function Sidebar() {
                         href={item.href}
                         className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                           isActive
-                            ? 'bg-primary-100 text-primary'
-                            : 'text-gray-700 hover:bg-gray-100 hover:text-primary'
+                            ? 'bg-primary-100 dark:bg-primary-900/30 text-primary'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary'
                         }`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         <item.icon
                           className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                            isActive ? 'text-primary' : 'text-gray-500'
+                            isActive ? 'text-primary' : 'text-gray-500 dark:text-gray-400'
                           }`}
                           aria-hidden="true"
                         />
@@ -107,7 +107,7 @@ export default function Sidebar() {
 
       {/* Desktop sidebar */}
       <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
-        <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
+        <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
           <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
             <div className="flex flex-shrink-0 items-center px-4">
               <div className="flex items-center">
@@ -128,13 +128,13 @@ export default function Sidebar() {
                     href={item.href}
                     className={`group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
                       isActive
-                        ? 'bg-primary-100 text-primary'
-                        : 'text-gray-700 hover:bg-gray-100 hover:text-primary'
+                        ? 'bg-primary-100 dark:bg-primary-900/30 text-primary'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary'
                     }`}
                   >
                     <item.icon
                       className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                        isActive ? 'text-primary' : 'text-gray-500 group-hover:text-primary'
+                        isActive ? 'text-primary' : 'text-gray-500 dark:text-gray-400 group-hover:text-primary'
                       }`}
                       aria-hidden="true"
                     />
@@ -144,15 +144,15 @@ export default function Sidebar() {
               })}
             </nav>
           </div>
-          <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
+          <div className="flex flex-shrink-0 border-t border-gray-200 dark:border-gray-700 p-4">
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center">
-                <div className="relative h-9 w-9 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                  <User className="h-5 w-5 text-gray-500" />
+                <div className="relative h-9 w-9 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                  <User className="h-5 w-5 text-gray-500 dark:text-gray-400" />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-900">Juan dela Cruz</p>
-                  <p className="text-xs text-gray-500">Patient</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">Juan dela Cruz</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Patient</p>
                 </div>
               </div>
             </div>

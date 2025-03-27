@@ -185,7 +185,7 @@ export default function SymptomCheckerPage() {
   return (
     <MainLayout title="Symptom Checker">
       <div className="mb-4">
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-400">
           Our AI-powered symptom checker can help you understand your symptoms and provide guidance
           on next steps. This is not a replacement for professional medical advice.
         </p>
@@ -210,7 +210,7 @@ export default function SymptomCheckerPage() {
                   placeholder="Search for symptoms..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-primary focus:border-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                 />
               </div>
             </div>
@@ -218,7 +218,7 @@ export default function SymptomCheckerPage() {
             <div className="space-y-6">
               {filteredBodyAreas.map((area) => (
                 <div key={area.id}>
-                  <h3 className="text-md font-medium text-gray-900 mb-3">{area.name}</h3>
+                  <h3 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-3">{area.name}</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                     {area.symptoms.map((symptom) => {
                       const isSelected = selectedSymptoms.includes(symptom.id);
@@ -227,13 +227,13 @@ export default function SymptomCheckerPage() {
                           key={symptom.id}
                           className={`p-3 rounded-md border cursor-pointer transition-colors ${
                             isSelected
-                              ? 'border-primary-500 bg-primary-50 text-primary-700'
-                              : 'border-gray-200 hover:border-primary-300 hover:bg-gray-50'
+                              ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300'
+                              : 'border-gray-200 dark:border-gray-700 hover:border-primary-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                           }`}
                           onClick={() => handleSymptomToggle(symptom.id)}
                         >
                           <div className="flex items-center justify-between">
-                            <span className="text-sm">{symptom.name}</span>
+                            <span className="text-sm dark:text-gray-200">{symptom.name}</span>
                             {isSelected && <Check className="h-4 w-4 text-primary" />}
                           </div>
                         </div>
@@ -245,7 +245,7 @@ export default function SymptomCheckerPage() {
             </div>
           </CardContent>
           <CardFooter className="flex justify-between border-t border-gray-200 pt-4">
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500 dark:text-gray-400">
               {selectedSymptoms.length === 0
                 ? 'Select at least one symptom to continue'
                 : `${selectedSymptoms.length} symptom${
@@ -271,10 +271,10 @@ export default function SymptomCheckerPage() {
           <CardContent>
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   How long have you been experiencing these symptoms?
                 </label>
-                <select className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                <select className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-primary focus:ring-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                   <option>Less than a day</option>
                   <option>1-3 days</option>
                   <option>3-7 days</option>
@@ -284,27 +284,27 @@ export default function SymptomCheckerPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   How would you rate the severity of your symptoms?
                 </label>
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="border rounded-md p-3 cursor-pointer hover:border-primary-300 hover:bg-gray-50 text-center">
-                    <span className="block text-sm font-medium">Mild</span>
-                    <span className="text-gray-500 text-xs">Noticeable but not disruptive</span>
+                  <div className="border dark:border-gray-700 rounded-md p-3 cursor-pointer hover:border-primary-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-center">
+                    <span className="block text-sm font-medium dark:text-white">Mild</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-xs">Noticeable but not disruptive</span>
                   </div>
-                  <div className="border rounded-md p-3 cursor-pointer hover:border-primary-300 hover:bg-gray-50 text-center border-primary-500 bg-primary-50">
-                    <span className="block text-sm font-medium">Moderate</span>
-                    <span className="text-gray-500 text-xs">Disruptive to daily activities</span>
+                  <div className="border dark:border-gray-700 rounded-md p-3 cursor-pointer hover:border-primary-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-center border-primary-500 bg-primary-50 dark:bg-primary-900/50">
+                    <span className="block text-sm font-medium dark:text-white">Moderate</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-xs">Disruptive to daily activities</span>
                   </div>
-                  <div className="border rounded-md p-3 cursor-pointer hover:border-primary-300 hover:bg-gray-50 text-center">
-                    <span className="block text-sm font-medium">Severe</span>
-                    <span className="text-gray-500 text-xs">Significantly impacts daily life</span>
+                  <div className="border dark:border-gray-700 rounded-md p-3 cursor-pointer hover:border-primary-300 hover:bg-gray-50 dark:hover:bg-gray-800 text-center">
+                    <span className="block text-sm font-medium dark:text-white">Severe</span>
+                    <span className="text-gray-500 dark:text-gray-400 text-xs">Significantly impacts daily life</span>
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Have you recently taken any medication for these symptoms?
                 </label>
                 <div className="flex space-x-4">
@@ -315,7 +315,7 @@ export default function SymptomCheckerPage() {
                       value="yes"
                       className="form-radio text-primary focus:ring-primary"
                     />
-                    <span className="ml-2">Yes</span>
+                    <span className="ml-2 dark:text-white">Yes</span>
                   </label>
                   <label className="inline-flex items-center">
                     <input
@@ -325,13 +325,13 @@ export default function SymptomCheckerPage() {
                       className="form-radio text-primary focus:ring-primary"
                       defaultChecked
                     />
-                    <span className="ml-2">No</span>
+                    <span className="ml-2 dark:text-white">No</span>
                   </label>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Do you have any existing medical conditions?
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -342,7 +342,7 @@ export default function SymptomCheckerPage() {
                           type="checkbox"
                           className="form-checkbox text-primary focus:ring-primary"
                         />
-                        <span className="ml-2 text-sm">{condition}</span>
+                        <span className="ml-2 text-sm dark:text-white">{condition}</span>
                       </label>
                     )
                   )}
@@ -350,18 +350,18 @@ export default function SymptomCheckerPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Any additional notes about your symptoms?
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-primary focus:ring-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                   placeholder="Add any details that might be relevant..."
                 ></textarea>
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between border-t border-gray-200 pt-4">
+          <CardFooter className="flex justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
             <Button variant="outline" onClick={() => setStep('select')}>
               Back
             </Button>
@@ -377,8 +377,8 @@ export default function SymptomCheckerPage() {
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-12">
               <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
-              <p className="text-lg font-medium text-gray-900">Analyzing your symptoms...</p>
-              <p className="text-gray-600">
+              <p className="text-lg font-medium text-gray-900 dark:text-white">Analyzing your symptoms...</p>
+              <p className="text-gray-600 dark:text-gray-400">
                 Our AI is processing your information to provide you with insights.
               </p>
             </div>
@@ -405,8 +405,8 @@ export default function SymptomCheckerPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-6">
-                    <h3 className="text-md font-medium text-gray-900 mb-2">Based on your symptoms</h3>
-                    <p className="text-gray-600">
+                    <h3 className="text-md font-medium text-gray-900 dark:text-white mb-2">Based on your symptoms</h3>
+                    <p className="text-gray-600 dark:text-gray-400">
                       Here are the potential conditions that match your symptoms. This is not a
                       diagnosis, and you should consult with a healthcare professional for proper
                       evaluation.
@@ -417,9 +417,9 @@ export default function SymptomCheckerPage() {
                     {assessmentResult.possibleConditions.map((condition, index) => (
                       <div
                         key={index}
-                        className="border rounded-lg overflow-hidden"
+                        className="border dark:border-gray-700 rounded-lg overflow-hidden"
                       >
-                        <div className="flex justify-between items-center p-4 bg-gray-50 border-b">
+                        <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-700">
                           <div className="flex items-center">
                             <div
                               className={`h-10 w-10 rounded-full flex items-center justify-center mr-3 ${
@@ -439,9 +439,9 @@ export default function SymptomCheckerPage() {
                               )}
                             </div>
                             <div>
-                              <h4 className="font-medium text-gray-900">{condition.name}</h4>
+                              <h4 className="font-medium text-gray-900 dark:text-white">{condition.name}</h4>
                               <div className="flex items-center">
-                                <div className="w-16 h-1.5 bg-gray-200 rounded-full mr-2">
+                                <div className="w-16 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
                                   <div
                                     className={`h-full rounded-full ${
                                       condition.probability > 0.7
@@ -453,7 +453,7 @@ export default function SymptomCheckerPage() {
                                     style={{ width: `${condition.probability * 100}%` }}
                                   ></div>
                                 </div>
-                                <span className="text-xs text-gray-600">
+                                <span className="text-xs text-gray-600 dark:text-gray-400">
                                   {Math.round(condition.probability * 100)}% match
                                 </span>
                               </div>
@@ -475,10 +475,10 @@ export default function SymptomCheckerPage() {
                           </Badge>
                         </div>
                         <div className="p-4">
-                          <p className="text-sm text-gray-600 mb-3">{condition.description}</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{condition.description}</p>
                           <div>
-                            <h5 className="text-sm font-medium text-gray-900 mb-2">Recommendations:</h5>
-                            <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+                            <h5 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Recommendations:</h5>
+                            <ul className="list-disc pl-5 text-sm text-gray-600 dark:text-gray-400 space-y-1">
                               {condition.recommendations.map((rec, i) => (
                                 <li key={i}>{rec}</li>
                               ))}
@@ -497,11 +497,11 @@ export default function SymptomCheckerPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <h3 className="text-md font-medium text-blue-800 mb-2">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                      <h3 className="text-md font-medium text-blue-800 dark:text-blue-300 mb-2">
                         General Recommendations
                       </h3>
-                      <ul className="list-disc pl-5 text-sm text-blue-700 space-y-1">
+                      <ul className="list-disc pl-5 text-sm text-blue-700 dark:text-blue-300 space-y-1">
                         {assessmentResult.recommendations.map((rec, i) => (
                           <li key={i}>{rec}</li>
                         ))}
@@ -509,7 +509,7 @@ export default function SymptomCheckerPage() {
                     </div>
 
                     <div>
-                      <h3 className="text-md font-medium text-gray-900 mb-3">
+                      <h3 className="text-md font-medium text-gray-900 dark:text-white mb-3">
                         Would you like to consult with a doctor?
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -541,9 +541,9 @@ export default function SymptomCheckerPage() {
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className="border-t border-gray-200 pt-4">
+                <CardFooter className="border-t border-gray-200 dark:border-gray-700 pt-4">
                   <div className="w-full flex justify-between">
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
                       Was this assessment helpful?
                     </div>
                     <div className="flex space-x-2">
@@ -578,9 +578,9 @@ export default function SymptomCheckerPage() {
       )}
 
       {/* Disclaimer */}
-      <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <h3 className="text-md font-medium text-yellow-800 mb-2">Important Disclaimer</h3>
-        <p className="text-sm text-yellow-700">
+      <div className="mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+        <h3 className="text-md font-medium text-yellow-800 dark:text-yellow-300 mb-2">Important Disclaimer</h3>
+        <p className="text-sm text-yellow-700 dark:text-yellow-300">
           This symptom checker is for informational purposes only and is not a qualified medical
           opinion. It should not be used for self-diagnosis. Always consult with a healthcare
           professional for proper diagnosis and treatment. Seek immediate medical attention for

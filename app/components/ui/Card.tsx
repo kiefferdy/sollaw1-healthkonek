@@ -20,12 +20,12 @@ export function Card({
   className,
   ...props
 }: CardProps) {
-  const baseClasses = 'bg-white';
+  const baseClasses = 'bg-white dark:bg-gray-800';
   
   const variantClasses = {
-    default: 'shadow',
-    bordered: 'border border-gray-200',
-    elevated: 'shadow-md',
+    default: 'shadow dark:shadow-gray-700/10',
+    bordered: 'border border-gray-200 dark:border-gray-700',
+    elevated: 'shadow-md dark:shadow-gray-700/20',
   };
   
   const paddingClasses = {
@@ -80,7 +80,7 @@ interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
 
 export function CardTitle({ children, className, ...props }: CardTitleProps) {
   return (
-    <h3 className={cn('text-lg font-medium text-gray-900', className)} {...props}>
+    <h3 className={cn('text-lg font-medium text-gray-900 dark:text-white', className)} {...props}>
       {children}
     </h3>
   );
@@ -92,7 +92,7 @@ interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 
 export function CardContent({ children, className, ...props }: CardContentProps) {
   return (
-    <div className={cn('text-sm text-gray-700', className)} {...props}>
+    <div className={cn('text-sm text-gray-700 dark:text-gray-300', className)} {...props}>
       {children}
     </div>
   );

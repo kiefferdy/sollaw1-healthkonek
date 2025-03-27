@@ -15,7 +15,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children, title }: MainLayoutProps) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Sidebar />
       <div className="flex flex-1 flex-col md:pl-64">
         <Header />
@@ -23,7 +23,7 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
           <div className="py-6">
             {title && (
               <div className="px-4 sm:px-6 md:px-8">
-                <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
+                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">{title}</h1>
               </div>
             )}
             <div className="px-4 sm:px-6 md:px-8 mt-6">{children}</div>

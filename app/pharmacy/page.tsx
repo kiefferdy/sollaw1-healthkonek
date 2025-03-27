@@ -279,13 +279,13 @@ export default function PharmacyPage() {
   return (
     <MainLayout title="Pharmacy">
       <div className="mb-6">
-        <div className="bg-white rounded-lg shadow p-1">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-1">
           <div className="grid grid-cols-3 gap-1">
             <button
               className={`py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === 'my-meds'
                   ? 'bg-primary text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               onClick={() => setActiveTab('my-meds')}
             >
@@ -295,7 +295,7 @@ export default function PharmacyPage() {
               className={`py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === 'shop'
                   ? 'bg-primary text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               onClick={() => setActiveTab('shop')}
             >
@@ -305,7 +305,7 @@ export default function PharmacyPage() {
               className={`py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === 'orders'
                   ? 'bg-primary text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               onClick={() => setActiveTab('orders')}
             >
@@ -379,10 +379,10 @@ export default function PharmacyPage() {
                     .map((medication) => (
                       <div
                         key={medication.id}
-                        className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+                        className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-md transition-shadow bg-white dark:bg-gray-800"
                       >
                         <div className="p-4 flex items-start gap-4">
-                          <div className="w-16 h-16 bg-gray-100 rounded-md flex-shrink-0 flex items-center justify-center">
+                          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-md flex-shrink-0 flex items-center justify-center">
                             {medication.image ? (
                               <img
                                 src={medication.image}
@@ -390,14 +390,14 @@ export default function PharmacyPage() {
                                 className="w-full h-full object-cover rounded-md"
                               />
                             ) : (
-                              <Pill className="h-8 w-8 text-gray-400" />
+                              <Pill className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                             )}
                           </div>
                           <div className="flex-1">
                             <div className="flex justify-between">
                               <div>
-                                <h3 className="font-medium text-gray-900">{medication.name}</h3>
-                                <p className="text-sm text-gray-600">
+                                <h3 className="font-medium text-gray-900 dark:text-white">{medication.name}</h3>
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
                                   {medication.genericName} • {medication.dosage}
                                 </p>
                               </div>
@@ -419,28 +419,28 @@ export default function PharmacyPage() {
                               </Badge>
                             </div>
                             {medication.prescription && (
-                              <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-gray-600">
+                              <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-gray-600 dark:text-gray-400">
                                 <div>
-                                  <span className="block text-gray-500">Prescribed by</span>
+                                  <span className="block text-gray-500 dark:text-gray-500">Prescribed by</span>
                                   <span>{medication.prescription.doctor}</span>
                                 </div>
                                 <div>
-                                  <span className="block text-gray-500">Date</span>
+                                  <span className="block text-gray-500 dark:text-gray-500">Date</span>
                                   <span>{medication.prescription.date}</span>
                                 </div>
                                 <div>
-                                  <span className="block text-gray-500">Refills</span>
+                                  <span className="block text-gray-500 dark:text-gray-500">Refills</span>
                                   <span>{medication.prescription.refills} remaining</span>
                                 </div>
                                 <div>
-                                  <span className="block text-gray-500">Expires</span>
+                                  <span className="block text-gray-500 dark:text-gray-500">Expires</span>
                                   <span>{medication.prescription.expiryDate}</span>
                                 </div>
                               </div>
                             )}
-                            <div className="mt-3 bg-gray-50 p-2 rounded text-sm">
-                              <p className="font-medium text-gray-900">Instructions:</p>
-                              <p className="text-gray-600">
+                            <div className="mt-3 bg-gray-50 dark:bg-gray-700 p-2 rounded text-sm">
+                              <p className="font-medium text-gray-900 dark:text-white">Instructions:</p>
+                              <p className="text-gray-600 dark:text-gray-400">
                                 {medication.prescription?.instructions}
                               </p>
                             </div>
@@ -482,13 +482,13 @@ export default function PharmacyPage() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-sm font-medium text-gray-900 mb-2">Today</h3>
+                    <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Today</h3>
                     <div className="space-y-2">
-                      <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="font-medium text-gray-900">Morning</p>
-                            <p className="text-xs text-gray-600">8:00 AM - After breakfast</p>
+                            <p className="font-medium text-gray-900 dark:text-white">Morning</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">8:00 AM - After breakfast</p>
                           </div>
                           <Badge variant="success" rounded>
                             Taken
@@ -496,22 +496,22 @@ export default function PharmacyPage() {
                         </div>
                         <div className="mt-2">
                           <div className="flex items-center">
-                            <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                              <Pill className="h-3 w-3 text-blue-600" />
+                            <div className="h-6 w-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-2">
+                              <Pill className="h-3 w-3 text-blue-600 dark:text-blue-400" />
                             </div>
-                            <span className="text-sm">Metformin 500mg - 1 tablet</span>
-                            <div className="ml-2 h-4 w-4 bg-gray-200 rounded-full flex items-center justify-center">
+                            <span className="text-sm text-gray-900 dark:text-gray-300">Metformin 500mg - 1 tablet</span>
+                            <div className="ml-2 h-4 w-4 bg-gray-200 dark:bg-gray-600 rounded-full flex items-center justify-center">
                               <Check className="h-3 w-3 text-white" />
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="font-medium text-gray-900">Evening</p>
-                            <p className="text-xs text-gray-600">8:00 PM - After dinner</p>
+                            <p className="font-medium text-gray-900 dark:text-white">Evening</p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400">8:00 PM - After dinner</p>
                           </div>
                           <Badge variant="warning" rounded>
                             Upcoming
@@ -519,22 +519,22 @@ export default function PharmacyPage() {
                         </div>
                         <div className="mt-2 space-y-2">
                           <div className="flex items-center">
-                            <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                              <Pill className="h-3 w-3 text-blue-600" />
+                            <div className="h-6 w-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-2">
+                              <Pill className="h-3 w-3 text-blue-600 dark:text-blue-400" />
                             </div>
-                            <span className="text-sm">Metformin 500mg - 1 tablet</span>
+                            <span className="text-sm text-gray-900 dark:text-gray-300">Metformin 500mg - 1 tablet</span>
                           </div>
                           <div className="flex items-center">
-                            <div className="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-2">
-                              <Pill className="h-3 w-3 text-red-600" />
+                            <div className="h-6 w-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-2">
+                              <Pill className="h-3 w-3 text-red-600 dark:text-red-400" />
                             </div>
-                            <span className="text-sm">Losartan 50mg - 1 tablet</span>
+                            <span className="text-sm text-gray-900 dark:text-gray-300">Losartan 50mg - 1 tablet</span>
                           </div>
                           <div className="flex items-center">
-                            <div className="h-6 w-6 rounded-full bg-yellow-100 flex items-center justify-center mr-2">
-                              <Pill className="h-3 w-3 text-yellow-600" />
+                            <div className="h-6 w-6 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center mr-2">
+                              <Pill className="h-3 w-3 text-yellow-600 dark:text-yellow-400" />
                             </div>
-                            <span className="text-sm">Atorvastatin 20mg - 1 tablet</span>
+                            <span className="text-sm text-gray-900 dark:text-gray-300">Atorvastatin 20mg - 1 tablet</span>
                           </div>
                         </div>
                       </div>
@@ -542,32 +542,32 @@ export default function PharmacyPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-medium text-gray-900 mb-2">Medication Supply</h3>
+                    <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Medication Supply</h3>
                     <div className="space-y-2">
-                      <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex justify-between">
-                          <p className="font-medium text-gray-900">Metformin 500mg</p>
-                          <p className="text-sm text-gray-600">24 days left</p>
+                          <p className="font-medium text-gray-900 dark:text-white">Metformin 500mg</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">24 days left</p>
                         </div>
-                        <div className="mt-1 w-full bg-gray-200 rounded-full h-1.5">
+                        <div className="mt-1 w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
                           <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '60%' }}></div>
                         </div>
                       </div>
-                      <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex justify-between">
-                          <p className="font-medium text-gray-900">Losartan 50mg</p>
-                          <p className="text-sm text-gray-600">5 days left</p>
+                          <p className="font-medium text-gray-900 dark:text-white">Losartan 50mg</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">5 days left</p>
                         </div>
-                        <div className="mt-1 w-full bg-gray-200 rounded-full h-1.5">
+                        <div className="mt-1 w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
                           <div className="bg-yellow-500 h-1.5 rounded-full" style={{ width: '20%' }}></div>
                         </div>
                       </div>
-                      <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex justify-between">
-                          <p className="font-medium text-gray-900">Atorvastatin 20mg</p>
-                          <p className="text-sm text-gray-600">2 days left</p>
+                          <p className="font-medium text-gray-900 dark:text-white">Atorvastatin 20mg</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">2 days left</p>
                         </div>
-                        <div className="mt-1 w-full bg-gray-200 rounded-full h-1.5">
+                        <div className="mt-1 w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
                           <div className="bg-red-500 h-1.5 rounded-full" style={{ width: '10%' }}></div>
                         </div>
                       </div>
@@ -575,7 +575,7 @@ export default function PharmacyPage() {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="border-t border-gray-200 pt-4">
+              <CardFooter className="border-t border-gray-200 dark:border-gray-700 pt-4">
                 <Button variant="outline" fullWidth icon={<Clock className="h-4 w-4" />}>
                   Reminder Settings
                 </Button>
@@ -687,10 +687,10 @@ export default function PharmacyPage() {
                   {filteredMedications.map((medication) => (
                     <div
                       key={medication.id}
-                      className="border rounded-lg p-4 hover:shadow-md transition-shadow"
+                      className="border dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow bg-white dark:bg-gray-800"
                     >
                       <div className="flex items-start gap-3">
-                        <div className="w-16 h-16 bg-gray-100 rounded-md flex-shrink-0 flex items-center justify-center">
+                        <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-md flex-shrink-0 flex items-center justify-center">
                           {medication.image ? (
                             <img
                               src={medication.image}
@@ -698,14 +698,14 @@ export default function PharmacyPage() {
                               className="w-full h-full object-cover rounded-md"
                             />
                           ) : (
-                            <Pill className="h-8 w-8 text-gray-400" />
+                            <Pill className="h-8 w-8 text-gray-400 dark:text-gray-500" />
                           )}
                         </div>
                         <div className="flex-1">
                           <div className="flex justify-between">
                             <div>
-                              <h3 className="font-medium text-gray-900">{medication.name}</h3>
-                              <p className="text-sm text-gray-600">
+                              <h3 className="font-medium text-gray-900 dark:text-white">{medication.name}</h3>
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
                                 {medication.genericName} • {medication.dosage}
                               </p>
                             </div>
@@ -718,7 +718,7 @@ export default function PharmacyPage() {
                             </Badge>
                           </div>
                           <div className="mt-2 flex justify-between items-center">
-                            <p className="font-bold text-gray-900">₱{medication.price.toFixed(2)}</p>
+                            <p className="font-bold text-gray-900 dark:text-white">₱{medication.price.toFixed(2)}</p>
                             <Button
                               variant="primary"
                               size="sm"
@@ -749,7 +749,7 @@ export default function PharmacyPage() {
                   <div className="space-y-4">
                     {cartItems.map((item) => (
                       <div key={item.medication.id} className="flex items-start gap-3">
-                        <div className="w-12 h-12 bg-gray-100 rounded-md flex-shrink-0 flex items-center justify-center">
+                        <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-md flex-shrink-0 flex items-center justify-center">
                           {item.medication.image ? (
                             <img
                               src={item.medication.image}
@@ -757,37 +757,37 @@ export default function PharmacyPage() {
                               className="w-full h-full object-cover rounded-md"
                             />
                           ) : (
-                            <Pill className="h-6 w-6 text-gray-400" />
+                            <Pill className="h-6 w-6 text-gray-400 dark:text-gray-500" />
                           )}
                         </div>
                         <div className="flex-1">
                           <div className="flex justify-between items-start">
                             <div>
-                              <h4 className="text-sm font-medium text-gray-900">
+                              <h4 className="text-sm font-medium text-gray-900 dark:text-white">
                                 {item.medication.name}
                               </h4>
-                              <p className="text-xs text-gray-600">{item.medication.dosage}</p>
+                              <p className="text-xs text-gray-600 dark:text-gray-400">{item.medication.dosage}</p>
                             </div>
                             <button
-                              className="text-gray-400 hover:text-gray-700"
+                              className="text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300"
                               onClick={() => handleRemoveFromCart(item.medication.id)}
                             >
                               <X className="h-4 w-4" />
                             </button>
                           </div>
                           <div className="mt-2 flex justify-between items-center">
-                            <div className="flex items-center border rounded-md">
+                            <div className="flex items-center border dark:border-gray-700 rounded-md">
                               <button
-                                className="px-2 py-1 text-gray-500 hover:bg-gray-100"
+                                className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                                 onClick={() =>
                                   handleUpdateQuantity(item.medication.id, item.quantity - 1)
                                 }
                               >
                                 -
                               </button>
-                              <span className="px-2 text-sm">{item.quantity}</span>
+                              <span className="px-2 text-sm dark:text-gray-300">{item.quantity}</span>
                               <button
-                                className="px-2 py-1 text-gray-500 hover:bg-gray-100"
+                                className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                                 onClick={() =>
                                   handleUpdateQuantity(item.medication.id, item.quantity + 1)
                                 }
@@ -795,7 +795,7 @@ export default function PharmacyPage() {
                                 +
                               </button>
                             </div>
-                            <p className="text-sm font-medium">
+                            <p className="text-sm font-medium dark:text-white">
                               ₱{(item.medication.price * item.quantity).toFixed(2)}
                             </p>
                           </div>
@@ -803,29 +803,29 @@ export default function PharmacyPage() {
                       </div>
                     ))}
 
-                    <div className="pt-4 border-t border-gray-200">
+                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                       <div className="flex justify-between mb-2">
-                        <span className="text-sm text-gray-600">Subtotal</span>
-                        <span className="text-sm font-medium">₱{cartTotal.toFixed(2)}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">Subtotal</span>
+                        <span className="text-sm font-medium dark:text-white">₱{cartTotal.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between mb-2">
-                        <span className="text-sm text-gray-600">Delivery Fee</span>
-                        <span className="text-sm font-medium">₱50.00</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">Delivery Fee</span>
+                        <span className="text-sm font-medium dark:text-white">₱50.00</span>
                       </div>
                       <div className="flex justify-between font-bold">
-                        <span>Total</span>
-                        <span>₱{(cartTotal + 50).toFixed(2)}</span>
+                        <span className="dark:text-white">Total</span>
+                        <span className="dark:text-white">₱{(cartTotal + 50).toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
                 ) : (
                   <div className="py-8 text-center">
-                    <ShoppingCart className="h-12 w-12 text-gray-300 mx-auto mb-2" />
-                    <p className="text-gray-500">Your cart is empty</p>
+                    <ShoppingCart className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+                    <p className="text-gray-500 dark:text-gray-400">Your cart is empty</p>
                   </div>
                 )}
               </CardContent>
-              <CardFooter className="border-t border-gray-200 pt-4">
+              <CardFooter className="border-t border-gray-200 dark:border-gray-700 pt-4">
                 <Button
                   variant="primary"
                   fullWidth
@@ -843,8 +843,8 @@ export default function PharmacyPage() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-sm font-medium text-gray-900 mb-1">Delivery Address</h3>
-                    <p className="text-sm text-gray-600">
+                    <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-1">Delivery Address</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       123 Bonifacio St., Brgy. San Jose
                       <br />
                       Quezon City, Metro Manila
@@ -853,7 +853,7 @@ export default function PharmacyPage() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium text-gray-900 mb-1">Delivery Options</h3>
+                    <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-1">Delivery Options</h3>
                     <div className="space-y-2">
                       <div className="flex items-center">
                         <input
@@ -863,7 +863,7 @@ export default function PharmacyPage() {
                           className="form-radio text-primary focus:ring-primary"
                           defaultChecked
                         />
-                        <label htmlFor="standard" className="ml-2 block text-sm text-gray-900">
+                        <label htmlFor="standard" className="ml-2 block text-sm text-gray-900 dark:text-white">
                           Standard (2-3 days) - ₱50
                         </label>
                       </div>
@@ -874,7 +874,7 @@ export default function PharmacyPage() {
                           name="delivery"
                           className="form-radio text-primary focus:ring-primary"
                         />
-                        <label htmlFor="express" className="ml-2 block text-sm text-gray-900">
+                        <label htmlFor="express" className="ml-2 block text-sm text-gray-900 dark:text-white">
                           Express (24 hours) - ₱100
                         </label>
                       </div>
@@ -894,13 +894,13 @@ export default function PharmacyPage() {
             <CardTitle>Order History</CardTitle>
           </CardHeader>
           <CardContent className="px-0 py-0">
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
               {orders.map((order) => (
-                <div key={order.id} className="p-4 hover:bg-gray-50">
+                <div key={order.id} className="p-4 hover:bg-gray-50 dark:hover:bg-gray-800">
                   <div className="flex justify-between items-start mb-3">
                     <div>
-                      <h3 className="font-medium text-gray-900">Order #{order.id}</h3>
-                      <p className="text-sm text-gray-600">Placed on {order.date}</p>
+                      <h3 className="font-medium text-gray-900 dark:text-white">Order #{order.id}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Placed on {order.date}</p>
                     </div>
                     <Badge
                       variant={
@@ -921,23 +921,23 @@ export default function PharmacyPage() {
                     {order.medications.map((med) => (
                       <div key={med.id} className="flex items-center justify-between text-sm">
                         <div className="flex items-center">
-                          <Pill className="h-4 w-4 text-gray-400 mr-2" />
-                          <span>
+                          <Pill className="h-4 w-4 text-gray-400 dark:text-gray-500 mr-2" />
+                          <span className="dark:text-gray-300">
                             {med.name} ({med.quantity}x)
                           </span>
                         </div>
-                        <span className="font-medium">₱{med.price.toFixed(2)}</span>
+                        <span className="font-medium dark:text-white">₱{med.price.toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="flex justify-between items-center pt-2 border-t border-gray-200">
-                    <div className="text-sm text-gray-600">
+                  <div className="flex justify-between items-center pt-2 border-t border-gray-200 dark:border-gray-700">
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
                       {order.status === 'processing' && `Estimated delivery: ${order.estimatedDelivery}`}
                       {order.status === 'shipped' && `Tracking number: ${order.trackingNumber}`}
                       {order.status === 'delivered' && 'Order completed'}
                     </div>
-                    <div className="font-medium">Total: ₱{order.totalPrice.toFixed(2)}</div>
+                    <div className="font-medium dark:text-white">Total: ₱{order.totalPrice.toFixed(2)}</div>
                   </div>
 
                   <div className="mt-3 flex justify-end gap-2">

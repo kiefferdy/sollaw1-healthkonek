@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import { format, isToday, isTomorrow, isThisWeek, addMinutes } from 'date-fns';
 
 const MainLayout = dynamic(() => import('@/components/layout/MainLayout'), { ssr: false });
@@ -163,14 +164,14 @@ export default function AppointmentsPage() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Status
                   </label>
                   <select
                     id="status"
                     value={selectedStatus}
                     onChange={(e) => setSelectedStatus(e.target.value as any)}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-white px-3 py-2 text-sm"
+                    className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-primary focus:ring-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 text-sm"
                   >
                     <option value="all">All Appointments</option>
                     <option value="upcoming">Upcoming</option>
@@ -180,12 +181,12 @@ export default function AppointmentsPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="search" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Search
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Search className="h-4 w-4 text-gray-400" />
+                      <Search className="h-4 w-4 text-gray-400 dark:text-gray-500" />
                     </div>
                     <input
                       type="text"
@@ -193,7 +194,7 @@ export default function AppointmentsPage() {
                       placeholder="Search by doctor or specialty"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary bg-white px-3 py-2 text-sm"
+                      className="w-full pl-10 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-primary focus:ring-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 text-sm placeholder-gray-500 dark:placeholder-gray-400"
                     />
                   </div>
                 </div>
@@ -237,13 +238,13 @@ export default function AppointmentsPage() {
               </div>
             </CardHeader>
             <CardContent className="px-0 py-0">
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-gray-200 dark:divide-gray-700 dark:divide-gray-700">
                 {filteredAppointments.length > 0 ? (
                   filteredAppointments.map((appointment) => (
-                    <div key={appointment.id} className="p-4 hover:bg-gray-50">
+                    <div key={appointment.id} className="p-4 hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="flex items-start">
                         <div className="flex-shrink-0 mr-4">
-                          <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 overflow-hidden">
+                          <div className="h-12 w-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 overflow-hidden">
                             {appointment.doctorImage ? (
                               <img
                                 src={appointment.doctorImage}
@@ -258,10 +259,10 @@ export default function AppointmentsPage() {
                         <div className="flex-1">
                           <div className="flex justify-between items-start">
                             <div>
-                              <h4 className="font-medium text-gray-900">
+                              <h4 className="font-medium text-gray-900 dark:text-white">
                                 {appointment.doctorName}
                               </h4>
-                              <p className="text-sm text-gray-600">
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
                                 {appointment.doctorSpecialty}
                               </p>
                             </div>
@@ -278,7 +279,7 @@ export default function AppointmentsPage() {
                               {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
                             </Badge>
                           </div>
-                          <div className="mt-2 text-sm text-gray-600">
+                          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                             <div className="flex items-center mb-1">
                               <CalendarIcon className="h-4 w-4 mr-1" />
                               <span>
@@ -303,7 +304,7 @@ export default function AppointmentsPage() {
                             </div>
                           </div>
                           {appointment.notes && (
-                            <div className="mt-2 p-2 bg-gray-50 rounded text-sm text-gray-600">
+                            <div className="mt-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-sm text-gray-600 dark:text-gray-400">
                               <p className="font-medium">Notes:</p>
                               <p>{appointment.notes}</p>
                             </div>
@@ -327,7 +328,7 @@ export default function AppointmentsPage() {
                   ))
                 ) : (
                   <div className="p-8 text-center">
-                    <p className="text-gray-500 mb-4">No appointments found for the selected criteria.</p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No appointments found for the selected criteria.</p>
                     <Button variant="primary" icon={<Plus className="h-4 w-4" />}>
                       Book New Appointment
                     </Button>

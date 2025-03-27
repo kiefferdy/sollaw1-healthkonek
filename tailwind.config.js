@@ -5,6 +5,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -78,6 +79,18 @@ module.exports = {
           "accent": "#F59E0B",
           "neutral": "#374151",
           "base-100": "#F9FAFB",
+          "info": "#3ABFF8",
+          "success": "#36D399",
+          "warning": "#FBBD23",
+          "error": "#F87272",
+        },
+        healthkonek_dark: {
+          "primary": "#3B82F6",
+          "secondary": "#10B981",
+          "accent": "#F59E0B",
+          "neutral": "#1F2937",
+          "base-100": "#111827",
+          "base-content": "#F9FAFB",
           "info": "#3ABFF8",
           "success": "#36D399",
           "warning": "#FBBD23",
