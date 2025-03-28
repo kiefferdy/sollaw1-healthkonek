@@ -1,100 +1,78 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 type Theme = 'light' | 'dark' | 'system';
 
-interface ThemeContextProps {
+interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
 }
 
-const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('system');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // First, check if there's a theme preference in localStorage
-    const storedTheme = localStorage.getItem('theme') as Theme | null;
-    if (storedTheme) {
-      setTheme(storedTheme);
+    const savedTheme = localStorage.getItem('theme') as Theme | null;
+    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
+      setTheme(savedTheme);
     }
-    setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
-    
-    const root = window.document.documentElement;
-    
-    // Remove all theme classes first
-    root.classList.remove('dark', 'light');
-    
-    // Handle theme application
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      
-      // Add the theme class to the html element
-      root.classList.add(systemTheme);
-      
-      // Set the data-theme for daisyUI
-      root.setAttribute('data-theme', systemTheme === 'dark' ? 'healthkonek_dark' : 'healthkonek');
-    } else {
-      // Add the theme class to the html element
-      root.classList.add(theme);
-      
-      // Set the data-theme for daisyUI
-      root.setAttribute('data-theme', theme === 'dark' ? 'healthkonek_dark' : 'healthkonek');
-    }
-    
-    // Save to localStorage
-    localStorage.setItem('theme', theme);
-  }, [theme, mounted]);
-
-  // Add listener for system theme changes
-  useEffect(() => {
-    if (!mounted || theme !== 'system') return;
-    
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const handleChange = () => {
       if (theme === 'system') {
-        const root = window.document.documentElement;
-        const isDark = mediaQuery.matches;
-        
-        // Clear existing theme classes
-        root.classList.remove('dark', 'light');
-        
-        // Add the appropriate theme class
-        root.classList.add(isDark ? 'dark' : 'light');
-        
-        // Set daisyUI theme
-        root.setAttribute('data-theme', isDark ? 'healthkonek_dark' : 'healthkonek');
+        updateTheme(theme);
       }
     };
     
     mediaQuery.addEventListener('change', handleChange);
+    updateTheme(theme);
+    
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme, mounted]);
+  }, [theme]);
 
-  // Prevent flash of default theme while loading
-  if (!mounted) {
-    return <>{children}</>;
-  }
+  const updateTheme = (newTheme: Theme) => {
+    localStorage.setItem('theme', newTheme);
+    
+    const isDark = 
+      newTheme === 'dark' || 
+      (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      document.documentElement.setAttribute('data-theme', 'healthkonek_dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      document.documentElement.setAttribute('data-theme', 'healthkonek');
+    }
+  };
+
+  const value = {
+    theme,
+    setTheme: (newTheme: Theme) => {
+      setTheme(newTheme);
+      updateTheme(newTheme);
+    },
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
-export function useTheme() {
+export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
-}
+};
