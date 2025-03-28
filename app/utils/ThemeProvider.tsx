@@ -30,10 +30,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       }
     };
     
-    mediaQuery.addEventListener('change', handleChange);
-    updateTheme(theme);
-    
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    // Modern way to add event listener that's compatible with all browsers
+    try {
+      // Modern API (standard)
+      mediaQuery.addEventListener('change', handleChange);
+      updateTheme(theme);
+      
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    } catch (e) {
+      // Fallback for older browsers
+      mediaQuery.addListener(handleChange);
+      updateTheme(theme);
+      
+      return () => mediaQuery.removeListener(handleChange);
+    }
   }, [theme]);
 
   const updateTheme = (newTheme: Theme) => {

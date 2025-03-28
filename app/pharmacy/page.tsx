@@ -337,7 +337,7 @@ export default function PharmacyPage() {
                       placeholder="Search medications..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-primary focus:border-primary"
                     />
                   </div>
                 </div>
@@ -616,7 +616,7 @@ export default function PharmacyPage() {
                       placeholder="Search medications..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-primary focus:border-primary"
                     />
                   </div>
                 </div>
@@ -776,7 +776,7 @@ export default function PharmacyPage() {
                             </button>
                           </div>
                           <div className="mt-2 flex justify-between items-center">
-                            <div className="flex items-center border dark:border-gray-700 rounded-md">
+                            <div className="flex items-center border dark:border-gray-700 rounded-md bg-white dark:bg-gray-800">
                               <button
                                 className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                                 onClick={() =>

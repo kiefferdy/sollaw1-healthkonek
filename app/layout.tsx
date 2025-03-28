@@ -23,8 +23,16 @@ export default function RootLayout({
           {`
           (function() {
             // On page load or when changing themes, best to add inline in \`head\` to avoid FOUC
-            if (localStorage.getItem('theme') === 'dark' || 
-               (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Apply dark theme if:
+            // 1. User explicitly set theme to dark, or
+            // 2. Theme is 'system' and system prefers dark, or
+            // 3. No saved theme and system prefers dark
+            if (savedTheme === 'dark' || 
+               (savedTheme === 'system' && systemPrefersDark) ||
+               (!savedTheme && systemPrefersDark)) {
               document.documentElement.classList.add('dark');
               document.documentElement.classList.remove('light');
               document.documentElement.setAttribute('data-theme', 'healthkonek_dark');
