@@ -860,7 +860,7 @@ export default function PharmacyPage() {
                           type="radio"
                           id="standard"
                           name="delivery"
-                          className="form-radio text-primary focus:ring-primary"
+                          className="radio radio-primary"
                           defaultChecked
                         />
                         <label htmlFor="standard" className="ml-2 block text-sm text-gray-900 dark:text-white">
@@ -872,7 +872,7 @@ export default function PharmacyPage() {
                           type="radio"
                           id="express"
                           name="delivery"
-                          className="form-radio text-primary focus:ring-primary"
+                          className="radio radio-primary"
                         />
                         <label htmlFor="express" className="ml-2 block text-sm text-gray-900 dark:text-white">
                           Express (24 hours) - ₱100
