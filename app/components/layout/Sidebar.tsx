@@ -13,7 +13,8 @@ import {
   User,
   Settings,
   Menu,
-  X
+  X,
+  Video
 } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,6 +22,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Appointments', href: '/appointments', icon: Calendar },
+  { name: 'Consultations', href: '/consultations', icon: Video },
   { name: 'Health Records', href: '/records', icon: FileText },
   { name: 'Messages', href: '/messages', icon: MessageSquare },
   { name: 'Pharmacy', href: '/pharmacy', icon: Pill },
