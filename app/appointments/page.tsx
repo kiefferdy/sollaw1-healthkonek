@@ -203,6 +203,120 @@ const appointments: Appointment[] = [
         status: "cancelled",
         notes: "Routine check-up for child.",
     },
+    // Additional past appointments
+    {
+        id: 6,
+        doctorName: "Dr. James Wilson",
+        doctorSpecialty: "Orthopedic Surgeon",
+        doctorImage: "/images/doctor-1.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() - 15)), // 15 days ago
+        duration: 45,
+        type: "video",
+        status: "completed",
+        notes: "Post-surgery follow-up for knee replacement. Patient showing good progress with physical therapy.",
+    },
+    {
+        id: 7,
+        doctorName: "Dr. Elizabeth Chen",
+        doctorSpecialty: "Psychiatrist",
+        doctorImage: "/images/doctor-2.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() - 7)), // 7 days ago
+        duration: 60,
+        type: "video",
+        status: "completed",
+        notes: "Therapy session. Patient showing improvement with current medication regimen.",
+    },
+    {
+        id: 8,
+        doctorName: "Dr. Michael Patel",
+        doctorSpecialty: "Ophthalmologist",
+        doctorImage: "/images/doctor-4.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() - 20)), // 20 days ago
+        duration: 30,
+        type: "video",
+        status: "completed",
+        notes: "Annual eye examination. Prescription updated for reading glasses.",
+    },
+    // Additional cancelled appointments
+    {
+        id: 9,
+        doctorName: "Dr. Maria Santos",
+        doctorSpecialty: "Cardiologist",
+        doctorImage: "/images/doctor-3.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() - 3)), // 3 days ago
+        duration: 30,
+        type: "video",
+        status: "cancelled",
+        notes: "Routine heart check-up. Cancelled due to doctor's emergency.",
+    },
+    {
+        id: 10,
+        doctorName: "Dr. Carlos Rodriguez",
+        doctorSpecialty: "Gastroenterologist",
+        doctorImage: "/images/doctor-5.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() - 8)), // 8 days ago
+        duration: 45,
+        type: "phone",
+        status: "cancelled",
+        notes: "Follow-up on digestive issues. Cancelled by patient due to scheduling conflict.",
+    },
+    {
+        id: 11,
+        doctorName: "Dr. Sarah Johnson",
+        doctorSpecialty: "Allergist",
+        doctorImage: "/images/doctor-2.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() - 5)), // 5 days ago
+        duration: 30,
+        type: "video",
+        status: "cancelled",
+        notes: "Seasonal allergy consultation. Rescheduled for next week.",
+    },
+    // Additional upcoming appointments
+    {
+        id: 12,
+        doctorName: "Dr. David Williams",
+        doctorSpecialty: "Pulmonologist",
+        doctorImage: "/images/doctor-4.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() + 3)), // 3 days from now
+        duration: 45,
+        type: "video",
+        status: "upcoming",
+        notes: "Respiratory assessment and treatment follow-up.",
+    },
+    {
+        id: 13,
+        doctorName: "Dr. Emily Taylor",
+        doctorSpecialty: "Rheumatologist",
+        doctorImage: "/images/doctor-3.jpg",
+        date: new Date(new Date().setDate(new Date().getDate() + 5)), // 5 days from now
+        duration: 30,
+        type: "phone",
+        status: "upcoming",
+        notes: "Joint pain consultation and medication review.",
+    },
+    // Multiple appointments on the same day (today)
+    {
+        id: 14,
+        doctorName: "Dr. Robert Johnson",
+        doctorSpecialty: "Neurologist",
+        doctorImage: "/images/doctor-1.jpg",
+        date: new Date(new Date().setHours(10, 0, 0, 0)), // Today at 10:00 AM
+        duration: 40,
+        type: "video",
+        status: "upcoming",
+        notes: "Follow-up on recent headaches and medication effectiveness.",
+    },
+    {
+        id: 15,
+        doctorName: "Dr. Alicia Gomez",
+        doctorSpecialty: "Psychiatrist",
+        doctorImage: "/images/doctor-5.jpg",
+        date: new Date(new Date().setHours(13, 0, 0, 0)), // Today at 1:00 PM
+        duration: 60,
+        type: "video",
+        status: "upcoming",
+        notes: "Monthly therapy session and medication check.",
+    },
 ];
 
 // Custom component for the video call UI
@@ -689,23 +803,26 @@ const BookAppointmentModal = ({
                                         onChange={(value) => {
                                             // Handle both single date and date range
                                             if (value instanceof Date) {
-                                                setSelectedDate(value);
+                                                setSelectedDate(new Date(value));
                                             } else if (
                                                 Array.isArray(value) &&
-                                                value.length > 0
+                                                value.length > 0 &&
+                                                value[0] instanceof Date
                                             ) {
                                                 // If it's a range, use the first date
-                                                setSelectedDate(value[0]);
+                                                setSelectedDate(new Date(value[0]));
                                             }
                                         }}
                                         value={selectedDate}
                                         className="w-full border-none"
-                                        tileDisabled={({ date }) =>
+                                        tileDisabled={({ date, view }: { date: Date; view: string }) => 
+                                            // Only disable tiles in month view
+                                            view === 'month' && 
                                             !selectedDoctor.availableDates.some(
                                                 (d) =>
                                                     isSameDay(
                                                         parseISO(d),
-                                                        date,
+                                                        new Date(date),
                                                     ),
                                             )
                                         }
@@ -930,8 +1047,6 @@ const BookAppointmentModal = ({
     );
 };
 
-// Week day selector component has been removed as requested
-
 export default function AppointmentsPage() {
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [selectedStatus, setSelectedStatus] = useState<
@@ -945,7 +1060,7 @@ export default function AppointmentsPage() {
         useState<Appointment | null>(null);
 
     const filterAppointments = (): Appointment[] => {
-        return appointments.filter((appointment) => {
+        const filtered = appointments.filter((appointment) => {
             // Filter by tab (status)
             if (activeTab === "upcoming" && appointment.status !== "upcoming") {
                 return false;
@@ -998,6 +1113,9 @@ export default function AppointmentsPage() {
 
             return true;
         });
+
+        // Sort appointments by time
+        return filtered.sort((a, b) => a.date.getTime() - b.date.getTime());
     };
 
     const filteredAppointments = filterAppointments();
@@ -1045,111 +1163,322 @@ export default function AppointmentsPage() {
 
     return (
         <MainLayout title="Appointments">
-            <Tabs
-                value={activeTab}
-                onValueChange={setActiveTab}
-                className="mb-6"
-            >
-                <TabsList>
-                    <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-                    <TabsTrigger value="past">Past</TabsTrigger>
-                    <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
-                </TabsList>
-            </Tabs>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                <Tabs
+                    value={activeTab}
+                    onValueChange={setActiveTab}
+                    className="w-full sm:w-auto"
+                >
+                    <TabsList className="w-full sm:w-auto grid grid-cols-3 sm:flex">
+                        <TabsTrigger value="upcoming" className="px-4 py-2">Upcoming</TabsTrigger>
+                        <TabsTrigger value="past" className="px-4 py-2">Past</TabsTrigger>
+                        <TabsTrigger value="cancelled" className="px-4 py-2">Cancelled</TabsTrigger>
+                    </TabsList>
+                </Tabs>
+                
+                <div className="hidden sm:flex gap-2">
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <Search className="h-4 w-4 text-gray-400" />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Search appointments"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-64 pl-10 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-primary focus:ring-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 text-sm"
+                        />
+                    </div>
+                    <Button
+                        variant="primary"
+                        icon={<Plus className="h-4 w-4" />}
+                        onClick={() => setIsBookingModalOpen(true)}
+                    >
+                        New Appointment
+                    </Button>
+                </div>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
                 {/* Left column - Calendar and filters */}
-                <div className="md:col-span-1 space-y-6">
+                <div className="lg:col-span-2 space-y-6">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Calendar</CardTitle>
+                            <CardTitle className="flex items-center justify-between">
+                                <span>Calendar</span>
+                                <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                    {selectedDate && format(selectedDate, "MMMM yyyy")}
+                                </div>
+                            </CardTitle>
                         </CardHeader>
                         <CardContent>
                             <Calendar
                                 onChange={(value) => {
                                     // Handle both single date and date range
                                     if (value instanceof Date) {
-                                        setSelectedDate(value);
+                                        setSelectedDate(new Date(value));
                                     } else if (
                                         Array.isArray(value) &&
-                                        value.length > 0
+                                        value.length > 0 &&
+                                        value[0] instanceof Date
                                     ) {
                                         // If it's a range, use the first date
-                                        setSelectedDate(value[0]);
+                                        setSelectedDate(new Date(value[0]));
                                     }
                                 }}
                                 value={selectedDate}
-                                className="w-full border-none"
+                                className="w-full border-none text-base calendar-enhanced"
+                                tileClassName={({ date, view }: { date: Date; view: string }) => {
+                                    // Only add extra classes to month view
+                                    return view === 'month' ? 'relative calendar-tile' : null;
+                                }}
+                                tileContent={({ date, view }: { date: Date; view: string }) => {
+                                    // Only show indicators in month view
+                                    if (view !== 'month') return null;
+                                    
+                                    // Count appointments by status for this date
+                                    const appointmentsOnDay = appointments.filter(appointment => 
+                                        isSameDay(new Date(appointment.date), new Date(date))
+                                    );
+                                    
+                                    if (appointmentsOnDay.length === 0) return null;
+                                    
+                                    // Check for each type of appointment
+                                    const hasUpcoming = appointmentsOnDay.some(a => a.status === 'upcoming');
+                                    const hasCompleted = appointmentsOnDay.some(a => a.status === 'completed');
+                                    const hasCancelled = appointmentsOnDay.some(a => a.status === 'cancelled');
+                                    
+                                    return (
+                                        <div className="dots-container">
+                                            {hasUpcoming && <div className="dot upcoming-dot" title="Upcoming appointment"></div>}
+                                            {hasCompleted && <div className="dot completed-dot" title="Completed appointment"></div>}
+                                            {hasCancelled && <div className="dot cancelled-dot" title="Cancelled appointment"></div>}
+                                        </div>
+                                    );
+                                }}
                             />
+                            <style jsx global>{`
+                                /* Custom styles for larger calendar */
+                                .calendar-enhanced {
+                                    font-size: 1.1rem;
+                                }
+                                .react-calendar {
+                                    width: 100%;
+                                    max-width: 100%;
+                                    font-family: inherit;
+                                    line-height: 1.75;
+                                    border: 1px solid #e5e7eb;
+                                    border-radius: 0.5rem;
+                                    padding: 0.5rem;
+                                    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+                                }
+                                .dark .react-calendar {
+                                    border-color: #374151;
+                                    background-color: #1f2937;
+                                    color: #e5e7eb;
+                                }
+                                .react-calendar abbr {
+                                    text-decoration: none;
+                                }
+                                .react-calendar__month-view__weekdays__weekday {
+                                    padding: 0.75rem 0;
+                                    font-weight: 600;
+                                    text-decoration: none;
+                                    font-size: 0.9rem;
+                                }
+                                .react-calendar__month-view__weekdays__weekday abbr {
+                                    text-decoration: none;
+                                }
+                                .react-calendar__month-view__days__day {
+                                    padding: 0.75rem 0 1.2rem 0;
+                                    font-size: 1rem;
+                                    position: relative;
+                                }
+                                .react-calendar__navigation button {
+                                    font-size: 1.1rem;
+                                    padding: 0.5rem 0;
+                                    background: none;
+                                    border-radius: 0.375rem;
+                                }
+                                .react-calendar__navigation button:hover,
+                                .react-calendar__navigation button:focus {
+                                    background-color: #f3f4f6;
+                                }
+                                .dark .react-calendar__navigation button:hover,
+                                .dark .react-calendar__navigation button:focus {
+                                    background-color: #374151;
+                                }
+                                .react-calendar__month-view__days__day--weekend {
+                                    color: #ef4444;
+                                }
+                                .dark .react-calendar__month-view__days__day--weekend {
+                                    color: #f87171;
+                                }
+                                .react-calendar__tile--active,
+                                .react-calendar__tile--active:enabled:hover {
+                                    background: #2563eb;
+                                    border-radius: 9999px;
+                                    color: white;
+                                }
+                                .react-calendar__tile--now {
+                                    background: rgba(37, 99, 235, 0.1);
+                                    border-radius: 9999px;
+                                }
+                                .dark .react-calendar__tile--now {
+                                    background: rgba(37, 99, 235, 0.2);
+                                }
+                                .react-calendar__tile:enabled:hover {
+                                    background-color: #f3f4f6;
+                                    border-radius: 9999px;
+                                }
+                                .dark .react-calendar__tile:enabled:hover {
+                                    background-color: #374151;
+                                }
+                                
+                                /* Appointment indicator styles */
+                                .calendar-tile {
+                                    height: 100%;
+                                }
+                                .dots-container {
+                                    position: absolute;
+                                    bottom: 10px;
+                                    left: 0;
+                                    right: 0;
+                                    display: flex;
+                                    gap: 3px;
+                                    justify-content: center;
+                                    pointer-events: none;
+                                }
+                                .dot {
+                                    width: 5px;
+                                    height: 5px;
+                                    border-radius: 50%;
+                                }
+                                .upcoming-dot {
+                                    background-color: #2563eb;
+                                }
+                                .completed-dot {
+                                    background-color: #10b981;
+                                }
+                                .cancelled-dot {
+                                    background-color: #f87272;
+                                }
+                            `}</style>
+                            <div className="flex items-center justify-center text-xs text-gray-500 dark:text-gray-400 mt-4 space-x-4">
+                                <div className="flex items-center">
+                                    <div className="w-3 h-3 rounded-full bg-blue-600 mr-2"></div>
+                                    <span>Upcoming</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span>Completed</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <div className="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
+                                    <span>Cancelled</span>
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Filters</CardTitle>
+                            <CardTitle>Quick Stats</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="space-y-4">
-                                <div>
-                                    <label
-                                        htmlFor="status"
-                                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                                    >
-                                        Status
-                                    </label>
-                                    <select
-                                        id="status"
-                                        value={selectedStatus}
-                                        onChange={(e) =>
-                                            setSelectedStatus(
-                                                e.target.value as any,
-                                            )
-                                        }
-                                        className="w-full rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-primary focus:ring-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 text-sm"
-                                    >
-                                        <option value="all">
-                                            All Appointments
-                                        </option>
-                                        <option value="upcoming">
-                                            Upcoming
-                                        </option>
-                                        <option value="completed">
-                                            Completed
-                                        </option>
-                                        <option value="cancelled">
-                                            Cancelled
-                                        </option>
-                                    </select>
+                            <div className="space-y-6">
+                                {/* Next appointment */}
+                                <div className="border-l-4 border-primary rounded-r-lg p-4 bg-primary/5">
+                                    <h3 className="text-sm uppercase font-semibold text-gray-500 dark:text-gray-400">Next Appointment</h3>
+                                    {appointments.filter(a => a.status === 'upcoming' && new Date(a.date) > new Date()).length > 0 ? (
+                                        (() => {
+                                            const nextAppointment = appointments
+                                                .filter(a => a.status === 'upcoming' && new Date(a.date) > new Date())
+                                                .sort((a, b) => a.date.getTime() - b.date.getTime())[0];
+                                            return (
+                                                <div className="mt-1">
+                                                    <div className="flex items-center gap-3 mb-1">
+                                                        <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                                                            {nextAppointment.type === 'video' ? 
+                                                                <Video className="h-4 w-4 text-primary" /> : 
+                                                                <Phone className="h-4 w-4 text-primary" />}
+                                                        </div>
+                                                        <div>
+                                                            <p className="font-medium text-gray-900 dark:text-white">{nextAppointment.doctorName}</p>
+                                                            <p className="text-sm text-gray-500 dark:text-gray-400">{nextAppointment.doctorSpecialty}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 gap-3 mt-2">
+                                                        <div className="flex items-center">
+                                                            <CalendarIcon className="h-4 w-4 mr-1 text-gray-400" />
+                                                            <span>{formatAppointmentDate(nextAppointment.date)}</span>
+                                                        </div>
+                                                        <div className="flex items-center">
+                                                            <Clock className="h-4 w-4 mr-1 text-gray-400" />
+                                                            <span>{nextAppointment.duration} min</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })()
+                                    ) : (
+                                        <p className="mt-1 text-gray-600 dark:text-gray-300">No upcoming appointments scheduled</p>
+                                    )}
                                 </div>
 
-                                <div>
-                                    <label
-                                        htmlFor="search"
-                                        className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                                    >
-                                        Search
-                                    </label>
-                                    <div className="relative">
-                                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <Search className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                                        </div>
-                                        <input
-                                            type="text"
-                                            id="search"
-                                            placeholder="Search by doctor or specialty"
-                                            value={searchQuery}
-                                            onChange={(e) =>
-                                                setSearchQuery(e.target.value)
-                                            }
-                                            className="w-full pl-10 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-primary focus:ring-primary bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2 text-sm placeholder-gray-500 dark:placeholder-gray-400"
-                                        />
+                                {/* Appointment counts */}
+                                <div className="grid grid-cols-3 gap-3">
+                                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 text-center">
+                                        <span className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                                            {appointments.filter(a => a.status === 'upcoming').length}
+                                        </span>
+                                        <p className="text-xs text-blue-600/70 dark:text-blue-400/70 mt-1">Upcoming</p>
+                                    </div>
+                                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-center">
+                                        <span className="text-lg font-semibold text-green-600 dark:text-green-400">
+                                            {appointments.filter(a => a.status === 'completed').length}
+                                        </span>
+                                        <p className="text-xs text-green-600/70 dark:text-green-400/70 mt-1">Completed</p>
+                                    </div>
+                                    <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-3 text-center">
+                                        <span className="text-lg font-semibold text-red-500 dark:text-red-400">
+                                            {appointments.filter(a => a.status === 'cancelled').length}
+                                        </span>
+                                        <p className="text-xs text-red-500/70 dark:text-red-400/70 mt-1">Cancelled</p>
                                     </div>
                                 </div>
 
+                                {/* This week stats */}
+                                <div className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                    <h3 className="text-sm uppercase font-semibold text-gray-500 dark:text-gray-400 mb-3">This Week</h3>
+                                    <div className="space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm text-gray-600 dark:text-gray-300">Appointments</span>
+                                            <span className="font-medium text-gray-900 dark:text-white">
+                                                {appointments.filter(a => isThisWeek(new Date(a.date))).length}
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm text-gray-600 dark:text-gray-300">Video Consultations</span>
+                                            <span className="font-medium text-gray-900 dark:text-white">
+                                                {appointments.filter(a => isThisWeek(new Date(a.date)) && a.type === 'video').length}
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-sm text-gray-600 dark:text-gray-300">Phone Consultations</span>
+                                            <span className="font-medium text-gray-900 dark:text-white">
+                                                {appointments.filter(a => isThisWeek(new Date(a.date)) && a.type === 'phone').length}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Book appointment button */}
                                 <Button
                                     variant="primary"
                                     fullWidth
-                                    icon={<Plus className="h-4 w-4" />}
+                                    size="lg"
+                                    icon={<Plus className="h-5 w-5" />}
                                     onClick={() => setIsBookingModalOpen(true)}
                                 >
                                     Book New Appointment
@@ -1160,7 +1489,7 @@ export default function AppointmentsPage() {
                 </div>
 
                 {/* Right column - Appointments list */}
-                <div className="md:col-span-2">
+                <div className="lg:col-span-3">
                     <Card>
                         <CardHeader>
                             <div className="flex justify-between items-center">
@@ -1169,6 +1498,11 @@ export default function AppointmentsPage() {
                                     {filteredAppointments.length !== 1
                                         ? "s"
                                         : ""}
+                                    {selectedDate && (
+                                        <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
+                                            for {format(selectedDate, "MMMM d, yyyy")}
+                                        </span>
+                                    )}
                                 </CardTitle>
                                 <div className="flex gap-2">
                                     <Button
@@ -1195,12 +1529,19 @@ export default function AppointmentsPage() {
                                 {filteredAppointments.length > 0 ? (
                                     filteredAppointments.map((appointment) => (
                                         <div
-                                            key={appointment.id}
-                                            className="p-4 hover:bg-gray-50 dark:hover:bg-gray-800"
-                                        >
-                                            <div className="flex items-start">
-                                                <div className="flex-shrink-0 mr-4">
-                                                    <div className="h-12 w-12 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 overflow-hidden">
+                                        key={appointment.id}
+                                        className="p-4 sm:p-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-l-4 rounded-r-lg my-3 shadow-sm"
+                                            style={{
+                                                    borderLeftColor: appointment.status === 'upcoming' 
+                                                        ? '#2563EB' 
+                                                        : appointment.status === 'completed' 
+                                                            ? '#10B981' 
+                                                            : '#F87272'
+                                                }}
+                                            >
+                                            <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                                                <div className="flex-shrink-0">
+                                                    <div className="h-16 w-16 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 overflow-hidden shadow-md border-2 border-white dark:border-gray-800">
                                                         {appointment.doctorImage ? (
                                                             <img
                                                                 src={
@@ -1222,7 +1563,7 @@ export default function AppointmentsPage() {
                                                         )}
                                                     </div>
                                                 </div>
-                                                <div className="flex-1">
+                                                <div className="flex-1 space-y-3">
                                                     <div className="flex justify-between items-start">
                                                         <div>
                                                             <h4 className="font-medium text-gray-900 dark:text-white">
@@ -1256,8 +1597,8 @@ export default function AppointmentsPage() {
                                                                 )}
                                                         </Badge>
                                                     </div>
-                                                    <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                                                        <div className="flex items-center mb-1">
+                                                    <div className="flex flex-wrap gap-3 mt-2 text-sm">
+                                                        <div className="flex items-center px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full">
                                                             <CalendarIcon className="h-4 w-4 mr-1" />
                                                             <span>
                                                                 {formatAppointmentDate(
@@ -1265,7 +1606,7 @@ export default function AppointmentsPage() {
                                                                 )}
                                                             </span>
                                                         </div>
-                                                        <div className="flex items-center mb-1">
+                                                        <div className="flex items-center px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full">
                                                             <Clock className="h-4 w-4 mr-1" />
                                                             <span>
                                                                 {
@@ -1274,7 +1615,7 @@ export default function AppointmentsPage() {
                                                                 minutes
                                                             </span>
                                                         </div>
-                                                        <div className="flex items-center">
+                                                        <div className="flex items-center px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full">
                                                             {appointment.type ===
                                                             "video" ? (
                                                                 <Video className="h-4 w-4 mr-1" />
@@ -1290,20 +1631,18 @@ export default function AppointmentsPage() {
                                                         </div>
                                                     </div>
                                                     {appointment.notes && (
-                                                        <div className="mt-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-sm text-gray-600 dark:text-gray-400">
-                                                            <p className="font-medium">
+                                                        <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg text-sm text-gray-600 dark:text-gray-400 border border-gray-100 dark:border-gray-700">
+                                                            <p className="font-medium text-gray-700 dark:text-gray-300 mb-1">
                                                                 Notes:
                                                             </p>
                                                             <p>
-                                                                {
-                                                                    appointment.notes
-                                                                }
+                                                                {appointment.notes}
                                                             </p>
                                                         </div>
                                                     )}
                                                     {appointment.status ===
                                                         "upcoming" && (
-                                                        <div className="mt-3 flex flex-wrap gap-2">
+                                                        <div className="mt-4 flex flex-wrap gap-2">
                                                             <Button
                                                                 variant="primary"
                                                                 size="sm"
@@ -1334,7 +1673,7 @@ export default function AppointmentsPage() {
                                                     )}
                                                     {appointment.status ===
                                                         "completed" && (
-                                                        <div className="mt-3 flex flex-wrap gap-2">
+                                                        <div className="mt-4 flex flex-wrap gap-2">
                                                             <Button
                                                                 variant="outline"
                                                                 size="sm"
@@ -1360,8 +1699,8 @@ export default function AppointmentsPage() {
                                         </div>
                                     ))
                                 ) : (
-                                    <div className="p-8 text-center">
-                                        <p className="text-gray-500 dark:text-gray-400 mb-4">
+                                    <div className="p-12 text-center">
+                                        <p className="text-gray-500 dark:text-gray-400 mb-6 text-lg">
                                             No appointments found for the
                                             selected criteria.
                                         </p>
