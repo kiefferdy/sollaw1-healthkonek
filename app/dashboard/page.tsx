@@ -111,20 +111,33 @@ export default function Dashboard() {
                 {/* Health Stats */}
                 <Card variant="default" hoverEffect>
                     <CardHeader>
-                        <CardTitle>Health Stats</CardTitle>
+                        <div className="flex justify-between items-center">
+                            <CardTitle>Health Stats</CardTitle>
+                            <Badge variant="primary" rounded>
+                                Live Data
+                            </Badge>
+                        </div>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
                             <div className="flex items-center">
-                                <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 mr-3">
+                                <div className="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 dark:text-red-400 mr-3">
                                     <Heart className="h-5 w-5" />
                                 </div>
-                                <div>
+                                <div className="flex-grow">
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
                                         Heart Rate
                                     </p>
-                                    <p className="text-lg font-medium text-gray-900 dark:text-white">
-                                        78 BPM
+                                    <div className="flex items-center">
+                                        <p className="text-lg font-medium text-gray-900 dark:text-white mr-2">
+                                            78 BPM
+                                        </p>
+                                        <Badge variant="success" rounded>
+                                            Normal
+                                        </Badge>
+                                    </div>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                        Range: 60-100 BPM
                                     </p>
                                 </div>
                             </div>
@@ -132,12 +145,20 @@ export default function Dashboard() {
                                 <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-3">
                                     <Activity className="h-5 w-5" />
                                 </div>
-                                <div>
+                                <div className="flex-grow">
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
                                         Blood Pressure
                                     </p>
-                                    <p className="text-lg font-medium text-gray-900 dark:text-white">
-                                        120/80 mmHg
+                                    <div className="flex items-center">
+                                        <p className="text-lg font-medium text-gray-900 dark:text-white mr-2">
+                                            120/80 mmHg
+                                        </p>
+                                        <Badge variant="success" rounded>
+                                            Normal
+                                        </Badge>
+                                    </div>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                        Optimal: Below 120/80
                                     </p>
                                 </div>
                             </div>
@@ -145,32 +166,38 @@ export default function Dashboard() {
                                 <div className="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 mr-3">
                                     <ThermometerSun className="h-5 w-5" />
                                 </div>
-                                <div>
+                                <div className="flex-grow">
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
                                         Body Temperature
                                     </p>
-                                    <p className="text-lg font-medium text-gray-900 dark:text-white">
-                                        36.6°C
+                                    <div className="flex items-center">
+                                        <p className="text-lg font-medium text-gray-900 dark:text-white mr-2">
+                                            36.6°C
+                                        </p>
+                                        <Badge variant="success" rounded>
+                                            Normal
+                                        </Badge>
+                                    </div>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                        Normal: 36.1-37.2°C
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </CardContent>
-                    <CardFooter>
-                        <div className="flex w-full gap-8">
-                            <Link href="/records">
-                                <Button variant="outline" fullWidth>
-                                    View Health Records
-                                    <ChevronRight className="h-4 w-4 ml-1" />
-                                </Button>
-                            </Link>
-                            <Link href="/wearable-devices">
-                                <Button variant="outline" fullWidth>
-                                    Wearable-Devices
-                                    <ChevronRight className="h-4 w-4 ml-1" />
-                                </Button>
-                            </Link>
-                        </div>
+                    <CardFooter className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
+                        <Link href="/records" className="w-full">
+                            <Button variant="outline" fullWidth>
+                                View Health Records
+                                <ChevronRight className="h-4 w-4 ml-1" />
+                            </Button>
+                        </Link>
+                        <Link href="/wearable-devices" className="w-full">
+                            <Button variant="primary" fullWidth>
+                                Wearable Devices
+                                <ChevronRight className="h-4 w-4 ml-1" />
+                            </Button>
+                        </Link>
                     </CardFooter>
                 </Card>
 
