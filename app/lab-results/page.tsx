@@ -19,6 +19,10 @@ import {
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { Dialog, DialogFooter } from '@/components/ui/Dialog';
+import { RequestTestForm, RequestTestFormData } from '@/components/lab-results/RequestTestForm';
+import { doctorOptions, testTypeOptions } from '@/components/lab-results/RequestTestForm';
+import { useToast } from '@/components/ui/Toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import {
   BarChart,
@@ -257,9 +261,14 @@ export default function LabResultsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedReport, setExpandedReport] = useState<string | null>('lr002'); // Default to showing the lipid panel
   const [isInsightPanelOpen, setIsInsightPanelOpen] = useState(true);
+  const [isRequestTestDialogOpen, setIsRequestTestDialogOpen] = useState(false);
+  const { toast, toastComponent } = useToast();
+  
+  // We need to be able to modify the lab reports for the demo
+  const [labReportsState, setLabReportsState] = useState<LabReport[]>(labReports);
   
   // Filter lab reports based on search query
-  const filteredReports = labReports.filter(
+  const filteredReports = labReportsState.filter(
     (report) =>
       report.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       report.doctor.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -278,7 +287,7 @@ export default function LabResultsPage() {
     total: 0,
   };
   
-  labReports.forEach((report) => {
+  labReportsState.forEach((report) => {
     report.tests.forEach((test) => {
       statusCounts.total++;
       statusCounts[test.status]++;
@@ -388,7 +397,7 @@ export default function LabResultsPage() {
             <CardHeader>
               <div className="flex justify-between items-center">
                 <CardTitle>Lab Reports</CardTitle>
-                <Button size="sm" variant="primary">Request New Test</Button>
+                <Button size="sm" variant="primary" onClick={() => setIsRequestTestDialogOpen(true)}>Request New Test</Button>
               </div>
             </CardHeader>
             <CardContent className="p-0">
@@ -823,7 +832,7 @@ export default function LabResultsPage() {
             <CardHeader>
               <div className="flex justify-between items-center">
                 <CardTitle>Lab Test Requests</CardTitle>
-                <Button size="sm" variant="primary">New Request</Button>
+                <Button size="sm" variant="primary" onClick={() => setIsRequestTestDialogOpen(true)}>New Request</Button>
               </div>
             </CardHeader>
             <CardContent className="p-0">
@@ -986,6 +995,61 @@ export default function LabResultsPage() {
           </Card>
         </TabsContent>
       </Tabs>
+      {/* Request New Test Dialog */}
+      <Dialog
+        isOpen={isRequestTestDialogOpen}
+        onClose={() => setIsRequestTestDialogOpen(false)}
+        title="Request New Laboratory Test"
+        size="lg"
+      >
+        <RequestTestForm
+          onSubmit={(data: RequestTestFormData) => {
+            console.log('Form submitted:', data);
+            // Here you would typically send this data to your backend
+            // For now, we'll just close the dialog and show a fake success state
+            setIsRequestTestDialogOpen(false);
+            
+            // Create a new lab report request
+            const today = new Date();
+            const appointmentDate = new Date(data.appointmentDate);
+            
+            // Find the doctor name based on the selected ID
+            const doctorName = doctorOptions.find(doc => doc.id === data.doctor)?.name || 'Unknown Doctor';
+            
+            // Find the test name based on the selected ID
+            const testTypeName = testTypeOptions.find(test => test.id === data.testType)?.name || 'Lab Test';
+            
+            // Create a new pending lab report
+            const newLabReport: LabReport = {
+              id: `lr${Math.floor(Math.random() * 10000)}`,
+              date: appointmentDate.toISOString().split('T')[0],
+              doctor: doctorName,
+              category: data.testType === 'xray' || data.testType === 'mri' || data.testType === 'ultrasound' 
+                ? 'Imaging' 
+                : data.testType === 'urinalysis' 
+                ? 'Urine' 
+                : 'Blood',
+              description: testTypeName,
+              status: 'pending',
+              file: '',
+              tests: [],
+            };
+            
+            // Add the new report to the state
+            setLabReportsState(prev => [newLabReport, ...prev]);
+            
+            // Switch to the requests tab to show the new request
+            setActiveTab('requests');
+            
+            // Show success notification
+            toast('success', 'Test request submitted successfully! You will receive a confirmation email shortly.');
+          }}
+          onCancel={() => setIsRequestTestDialogOpen(false)}
+        />
+      </Dialog>
+      
+      {/* Toast notifications */}
+      {toastComponent}
     </MainLayout>
   );
 }
