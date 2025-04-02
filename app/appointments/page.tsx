@@ -578,7 +578,7 @@ const BookAppointmentModal = ({
 
     return (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <Card className="w-full max-w-lg">
+            <Card className="w-full max-w-3xl">
                 <CardHeader>
                     <CardTitle>Book an Appointment</CardTitle>
                     <div className="flex items-center mt-2">
