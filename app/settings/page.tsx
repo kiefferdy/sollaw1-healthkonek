@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { 
   Shield, 
   Bell, 
@@ -18,7 +19,13 @@ import {
   EyeOff,
   AlertCircle,
   CheckCircle,
-  Heart
+  Heart,
+  Watch,
+  Glasses,
+  Activity,
+  PlusCircle,
+  BatteryMedium,
+  ChevronRight
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -849,71 +856,116 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
+                {/* Apple Watch */}
                 <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <div className="flex justify-between items-start">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                     <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 dark:text-red-400 mt-1 mr-3">
-                        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M16.5,12A4.5,4.5,0,0,0,12,7.5H11a4.5,4.5,0,0,0,0,9h1A4.5,4.5,0,0,0,16.5,12Z"></path><path d="M8.25,12a3.75,3.75,0,0,1,3.75-3.75h.75a3.75,3.75,0,0,1,0,7.5H12A3.75,3.75,0,0,1,8.25,12Z"></path><path d="M12,2.25A9.75,9.75,0,1,0,21.75,12,9.76,9.76,0,0,0,12,2.25Zm1,15.75H11a5.25,5.25,0,0,1,0-10.5h2a5.25,5.25,0,0,1,0,10.5Z"></path>
-                        </svg>
+                      <div className="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mt-1 mr-4">
+                        <Watch className="h-6 w-6" />
                       </div>
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white">Apple Watch Series 7</p>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                           Connected • Last synced: 15 minutes ago
                         </p>
-                        <div className="flex items-center mt-1">
+                        <div className="flex items-center mt-1 space-x-2">
                           <Badge variant="success" rounded>Active</Badge>
+                          <div className="flex items-center text-green-600 dark:text-green-400">
+                            <BatteryMedium className="h-4 w-4 mr-1" />
+                            <span className="text-xs">85%</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex items-center space-x-2 mt-4 sm:mt-0">
+                      <Button variant="outline" size="sm">Settings</Button>
+                      <Button variant="outline" size="sm">Disconnect</Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Smart Spectacles */}
+                <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                    <div className="flex items-start">
+                      <div className="h-12 w-12 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center text-yellow-600 dark:text-yellow-400 mt-1 mr-4">
+                        <Glasses className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">Smart Spectacles Pro</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          Connected • Last synced: 30 minutes ago
+                        </p>
+                        <div className="flex items-center mt-1 space-x-2">
+                          <Badge variant="success" rounded>Active</Badge>
+                          <div className="flex items-center text-green-600 dark:text-green-400">
+                            <BatteryMedium className="h-4 w-4 mr-1" />
+                            <span className="text-xs">72%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2 mt-4 sm:mt-0">
                       <Button variant="outline" size="sm">Settings</Button>
                       <Button variant="outline" size="sm">Disconnect</Button>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg flex justify-between items-center">
-                  <p className="text-gray-700 dark:text-gray-300">Connect a new wearable device</p>
-                  <Button variant="primary" size="sm">Connect Device</Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle>Health Monitoring Devices</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
+                {/* Blood Pressure Monitor */}
                 <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <div className="flex justify-between items-start">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                     <div className="flex items-start">
-                      <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mt-1 mr-3">
-                        <Heart className="h-5 w-5" />
+                      <div className="h-12 w-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mt-1 mr-4">
+                        <Activity className="h-6 w-6" />
                       </div>
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white">Blood Pressure Monitor</p>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                           Connected • Last synced: Yesterday
                         </p>
+                        <div className="flex items-center mt-1 space-x-2">
+                          <Badge variant="success" rounded>Active</Badge>
+                          <div className="flex items-center text-green-600 dark:text-green-400">
+                            <BatteryMedium className="h-4 w-4 mr-1" />
+                            <span className="text-xs">64%</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex items-center space-x-2 mt-4 sm:mt-0">
                       <Button variant="outline" size="sm">Settings</Button>
                       <Button variant="outline" size="sm">Disconnect</Button>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg flex justify-between items-center">
-                  <p className="text-gray-700 dark:text-gray-300">Connect a new health monitoring device</p>
-                  <Button variant="primary" size="sm">Connect Device</Button>
+                {/* Connect New Device Button */}
+                <div className="p-4 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg text-center">
+                  <div className="flex flex-col items-center justify-center py-3">
+                    <PlusCircle className="h-8 w-8 text-gray-400 dark:text-gray-600 mb-2" />
+                    <p className="font-medium text-gray-900 dark:text-white mb-2">
+                      Connect a New Device
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 max-w-md">
+                      Add a wearable or health monitoring device to track your health metrics
+                    </p>
+                    <Button variant="primary">Connect Device</Button>
+                  </div>
                 </div>
               </div>
             </CardContent>
+            <CardFooter>
+              <div className="w-full flex justify-between items-center">
+                <span className="text-sm text-gray-500 dark:text-gray-400">3 devices connected</span>
+                <Link href="/wearable-devices">
+                  <Button variant="outline" size="sm">
+                    Manage Devices
+                    <ChevronRight className="h-4 w-4 ml-1" />
+                  </Button>
+                </Link>
+              </div>
+            </CardFooter>
           </Card>
         </TabsContent>
       </Tabs>
